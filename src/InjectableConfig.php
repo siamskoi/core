@@ -26,7 +26,7 @@ abstract class InjectableConfig implements InjectableInterface, \IteratorAggrega
      *
      * @var array
      */
-    protected $config = [];
+    protected array $config = [];
 
     /**
      * At this moment on array based configs can be supported.
@@ -61,7 +61,7 @@ abstract class InjectableConfig implements InjectableInterface, \IteratorAggrega
     /**
      * {@inheritdoc}
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return array_key_exists($offset, $this->config);
     }
@@ -69,7 +69,7 @@ abstract class InjectableConfig implements InjectableInterface, \IteratorAggrega
     /**
      * {@inheritdoc}
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         if (!$this->offsetExists($offset)) {
             throw new ConfigException("Undefined configuration key '{$offset}'");
@@ -105,7 +105,7 @@ abstract class InjectableConfig implements InjectableInterface, \IteratorAggrega
     /**
      * {@inheritdoc}
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->config);
     }
